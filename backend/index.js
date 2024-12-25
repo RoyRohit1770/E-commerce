@@ -8,12 +8,13 @@ const cors = require("cors");
 require("dotenv").config(); // Load environment variables
 
 const port = process.env.PORT || 4000;
+const mongoURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/ecommerce';
 
 app.use(express.json());
 app.use(cors());
 
 // Database Connection With MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
