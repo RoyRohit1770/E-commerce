@@ -224,6 +224,12 @@ app.post('/removefromcart', fetchuser, async (req, res) => {
 app.post('/getcart', fetchuser, async (req, res) => {
   console.log("Get Cart");
   let userData = await Users.findOne({ _id: req.user.id });
+  if (!userData) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+  if (!userData.cartData) {
+    return res.status(200).json({ cartData: {} }); // Return an empty cart if none exists
+  }
   res.json(userData.cartData);
 
 })
